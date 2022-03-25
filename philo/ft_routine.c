@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:21:08 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/25 15:21:33 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:38:00 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_take_fork(t_philosopher *philo)
 	ft_put_message(philo, FORK);
 	ft_put_message(philo, FORK);
 	ft_put_message(philo, EAT);
-	ft_smart_usleep(philo->info.time_to_eat, philo->info.number_of_philosophers);
+	ft_smart_usleep(philo->info.time_to_eat,
+		philo->info.number_of_philosophers);
 	pthread_mutex_unlock(&philo->info.forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->info.forks[philo->right_fork]);
 	pthread_mutex_lock(&philo->lastmealcheck);
@@ -40,7 +41,8 @@ void	ft_take_fork(t_philosopher *philo)
 void	ft_sleep(t_philosopher *philo)
 {
 	ft_put_message(philo, SLEEP);
-	ft_smart_usleep(philo->info.time_to_sleep, philo->info.number_of_philosophers);
+	ft_smart_usleep(philo->info.time_to_sleep,
+		philo->info.number_of_philosophers);
 }
 
 void	*routine(void *arg)

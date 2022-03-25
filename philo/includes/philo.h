@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:08:51 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/25 14:01:47 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:51:27 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void				ft_smart_usleep(int time, int nb_philo);
 
 /** ft_routine **/
 void				ft_take_fork(t_philosopher *philo);
-void				ft_eat(t_philosopher *philo);
 void				ft_sleep(t_philosopher *philo);
 void				*ft_dead(void *arg);
 

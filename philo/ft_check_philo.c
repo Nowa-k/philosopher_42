@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:36 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/25 14:57:08 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:29:28 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@ void	ft_all_dead(t_philosopher *philo)
 {	
 	while (philo)
 	{
+		pthread_mutex_lock(&philo->deadischeck);
 		philo->dead = TRUE;
+		pthread_mutex_unlock(&philo->deadischeck);
 		philo = philo->next;
 	}
 }
 
 t_bool	ft_is_dead(t_philosopher *philo, t_philosopher *arg)
 {
+	(void) arg;
 	if (philo->info.time_to_die <= ft_time() - philo->info.time_to_start
 		- philo->last_meal)
 	{
 		pthread_mutex_unlock(&philo->nocrash);
 		pthread_mutex_lock(&philo->deadischeck);
 		philo->dead = TRUE;
-		ft_all_dead(arg);
 		pthread_mutex_unlock(&philo->deadischeck);
+		ft_all_dead(arg);
 		printf("%lld %d died\n", ft_time()
 			- philo->info.time_to_start, philo->id);
 		return (TRUE);
@@ -64,22 +67,21 @@ t_bool	ft_is_full_meal(t_philosopher *philo)
 void	*ft_check_philo(void *arg)
 {
 	t_philosopher	*philo;
+	t_philosopher	*first;
 	t_bool			end_time;
 	t_bool			end_full_meal;
 
 	end_time = FALSE;
 	end_full_meal = FALSE;
 	philo = (t_philosopher *)arg;
+	first = (t_philosopher *)arg;
 	while (end_time != TRUE && end_full_meal != TRUE)
 	{
-		while (philo)
+		while (philo && end_time != TRUE)
 		{
 			pthread_mutex_lock(&philo->nocrash);
-			if (ft_is_dead(philo, (t_philosopher *)arg) == TRUE)
-			{
+			if (ft_is_dead(philo, first) == TRUE)
 				end_time = TRUE;
-				break ;
-			}
 			pthread_mutex_unlock(&philo->nocrash);
 			philo = philo->next;
 		}
