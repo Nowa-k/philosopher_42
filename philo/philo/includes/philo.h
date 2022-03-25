@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:08:51 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/22 17:00:33 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:01:47 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_philosopher {
 	int						value;
 	int						last_meal;
 	int						id;
+	int						left_fork;
+	int						right_fork;
 	int						number_of_eat;
 	t_info					info;
 	t_bool					dead;
@@ -66,7 +68,7 @@ void				ft_putnbr(int nb);
 void				ft_putstr(char *str);
 void				ft_put_message(t_philosopher *philo, int message);
 long long int		ft_time(void);
-void				ft_smart_usleep(int time);
+void				ft_smart_usleep(int time, int nb_philo);
 
 /** ft_routine **/
 void				ft_take_fork(t_philosopher *philo);

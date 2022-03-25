@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:23:26 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/22 17:44:50 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:52:50 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_philosopher	*ft_add_new_philo(t_info info, int index)
 	new->next = NULL;
 	new->value = 0;
 	new->id = index;
+	new->left_fork = index - 1;
+	new->right_fork = index;
 	pthread_mutex_init(&new->nocrash, NULL);
 	pthread_mutex_init(&new->deadischeck, NULL);
 	pthread_mutex_init(&new->lastmealcheck, NULL);

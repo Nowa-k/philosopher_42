@@ -6,7 +6,7 @@
 /*   By: aleferra <aleferra@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:58:26 by aleferra          #+#    #+#             */
-/*   Updated: 2022/03/21 13:55:18 by aleferra         ###   ########.fr       */
+/*   Updated: 2022/03/23 10:52:13 by aleferra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ t_bool	ft_clear_philo(t_philosopher **philo)
 	while (tmp->next)
 	{
 		clear = tmp;
+		pthread_mutex_destroy(&clear->deadischeck);
+		pthread_mutex_destroy(&clear->lastmealcheck);
+		pthread_mutex_destroy(&clear->nocrash);
 		tmp = tmp->next;
 		free(clear);
 	}
